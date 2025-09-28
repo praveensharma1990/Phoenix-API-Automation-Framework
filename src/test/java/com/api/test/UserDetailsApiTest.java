@@ -6,6 +6,8 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
+import static com.api.utils.ConfigManager.*;
+
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -16,7 +18,7 @@ public class UserDetailsApiTest {
 	@Test()
 	public void getUserDetailsTest() {
 		given()
-		.baseUri("http://64.227.160.186:9000/v1")
+		.baseUri(getProperty("BASE_URI"))
 		.accept(ContentType.JSON)
 		.header(authHeader)
 		.log().all()
