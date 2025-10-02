@@ -36,7 +36,9 @@ public class CountApiTest {
 	 
 		
 		
-	} void validateMissingTokenInCountApi() {
+	}
+	@Test()
+	void validateMissingTokenInCountApi() {
 		enableLoggingOfRequestAndResponseIfValidationFails();
 		given()
 	 .baseUri(getProperty("BASE_URI"))

@@ -1,0 +1,14 @@
+
+
+<suite name="Phoneix API Test" verbose="1">
+     <test name="Phoneix Api test">
+    <classes>
+      
+      <class name="com.api.test.LoginApiTest"/>
+      <class name="com.api.test.UserDetailsApiTest"/>
+      <class name="com.api.test.CountApiTest"/>
+      <class name="com.api.test.MasterApiTest"/>
+      
+    </classes>
+  </test>
+</suite>
