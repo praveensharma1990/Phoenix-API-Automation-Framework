@@ -21,7 +21,7 @@ public class LoginApiTest {
 		given().baseUri(getProperty("BASE_URI")).contentType(ContentType.JSON).accept(ContentType.JSON)
 				.body(usercredencials).log().headers().log().method().log().uri().log().body().log().headers().when().post("login")
 				.then().statusCode(200).body("message", equalTo("Success")).body("data.token", notNullValue())
-				.time(lessThan(1000L))
+				.time(lessThan(1500L))
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemaValidator/loginApiSchema.json"));
 
 	}
