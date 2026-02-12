@@ -5,6 +5,8 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import static com.api.constant.UserRole.*;
 import static com.api.utils.AuthTokenProvider.*;
 import static com.api.utils.ConfigManager.*;
@@ -15,12 +17,8 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 public class CountApiTest {
 	@Test()
 	public void validateCountApiResponse() {
-		enableLoggingOfRequestAndResponseIfValidationFails();
 		given()
-	 .baseUri(getProperty("BASE_URI"))
-	 .header("Authorization",getToken(FD))
-	 .accept(ContentType.JSON)
-	 .log().all()
+	 .spec(SpecUtil.requestSpecWithAuth(FD))
 	 .when()
 	 .get("dashboard/count")	
 	 .then()
@@ -46,8 +44,7 @@ public class CountApiTest {
 	 .when()
 	 .get("dashboard/count")	
 	 .then()
-	 .statusCode(401)
-	 .log().all();
+	 .spec(SpecUtil.responseSpecificationText(401));
 	 
 	
 		

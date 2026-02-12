@@ -5,9 +5,10 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
-import com.api.constant.UserRole;
+import static com.api.constant.UserRole.*;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -16,10 +17,7 @@ public class MasterApiTest {
 	@Test()
 	public void masterApiTest() {
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URI"))
-		.contentType("")
-		.header("Authorization",AuthTokenProvider.getToken(UserRole.FD))
-		.log().all()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 		.post("master")
 		.then()
