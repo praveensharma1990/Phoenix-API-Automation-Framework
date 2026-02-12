@@ -19,8 +19,12 @@ public class LoginApiTest {
 	@Test()
 	 void loginApiTest() {
 		given().spec(SpecUtil.requestSpec(usercredencials))
-				.when().post("login")
-				.then().statusCode(200).body("message", equalTo("Success")).body("data.token", notNullValue())
+				.when()
+				.post("login")
+				.then()
+				.statusCode(200)
+				.body("message", equalTo("Success"))
+				.body("data.token", notNullValue())
 				.time(lessThan(2500L))
 				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemaValidator/loginApiSchema.json"));
 

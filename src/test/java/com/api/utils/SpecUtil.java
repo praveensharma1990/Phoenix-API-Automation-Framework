@@ -18,9 +18,15 @@ import com.api.pojo.UserCredencials;
 public class SpecUtil {
 
 	public static RequestSpecification requestSpec() {
-		return new RequestSpecBuilder().setBaseUri(getProperty("BASE_URI"))
-				.setAccept(ContentType.JSON).setContentType(ContentType.JSON).log(LogDetail.URI).log(LogDetail.HEADERS)
-				.log(LogDetail.BODY).log(LogDetail.METHOD).build();
+		return new RequestSpecBuilder()
+				.setBaseUri(getProperty("BASE_URI"))
+				.setAccept(ContentType.JSON)
+				.setContentType(ContentType.JSON)
+				.log(LogDetail.URI)
+				.log(LogDetail.HEADERS)
+				.log(LogDetail.BODY)
+				.log(LogDetail.METHOD)
+				.build();
 		
 
 	}
@@ -28,7 +34,8 @@ public class SpecUtil {
 	public static RequestSpecification requestSpec(Object payload) {
 		return new RequestSpecBuilder()
 				.setBaseUri(getProperty("BASE_URI"))
-				.setAccept(ContentType.JSON).setContentType(ContentType.JSON)
+				.setAccept(ContentType.JSON)
+				.setContentType(ContentType.JSON)
 				.setBody(payload)
 				.log(LogDetail.URI)
 				.log(LogDetail.HEADERS)
@@ -56,10 +63,22 @@ public class SpecUtil {
 		.expectResponseTime(Matchers.lessThan(1000L))
 		.expectStatusCode(200)
 		.log(LogDetail.ALL)
-		.build();
-		
+		.build();		
+	}
 	
-		
-		
+	public static ResponseSpecification responseSpecification(int status) {
+		return new ResponseSpecBuilder().expectContentType(ContentType.JSON)
+		.expectResponseTime(Matchers.lessThan(2000L))
+		.expectStatusCode(status)
+		.log(LogDetail.ALL)
+		.build();
+	}
+	
+	public static ResponseSpecification responseSpecificationText(int status) {
+		return new ResponseSpecBuilder()
+		.expectResponseTime(Matchers.lessThan(2000L))
+		.expectStatusCode(status)
+		.log(LogDetail.ALL)
+		.build();
 	}
 }

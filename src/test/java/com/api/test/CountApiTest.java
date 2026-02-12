@@ -44,8 +44,7 @@ public class CountApiTest {
 	 .when()
 	 .get("dashboard/count")	
 	 .then()
-	 .statusCode(401)
-	 .log().all();
+	 .spec(SpecUtil.responseSpecificationText(401));
 	 
 	
 		
