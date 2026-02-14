@@ -1,6 +1,5 @@
 package com.api.test;
 
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 import org.hamcrest.Matchers;
@@ -12,9 +11,7 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problem;
-import com.api.utils.AuthTokenProvider;
-import com.api.utils.ConfigManager;
-import com.api.utils.DateTimeProvider;
+import static com.api.utils.DateTimeProvider.getDateAndTimeDaysAgo;
 import com.api.utils.SpecUtil;
 
 import static io.restassured.RestAssured.*;
@@ -28,7 +25,7 @@ public class CreateJobApiTest {
 	public void createJobApiTest() {
    Customer customer = new Customer("Ram", "Sharma", "9161759333", "", "psagra13@gmail.com", "psagra12@gmail.com");
    CustomerAddress customerAddress = new CustomerAddress("B 233", "Ajanja", "Vashundra", "noida", "near mother dairy", "201301", "Uttar Pradesh", "India");
-   CustomerProduct customerProduct=new CustomerProduct("23456781801705", "23456799101805", "23456689101105",DateTimeProvider.getDateAndTimeDaysAgo(8), DateTimeProvider.getDateAndTimeDaysAgo(8), 1, 1);
+   CustomerProduct customerProduct=new CustomerProduct("23456781801705", "23456799101805", "23456689101105",getDateAndTimeDaysAgo(8), getDateAndTimeDaysAgo(8), 1, 1);
    Problem problems=new Problem(3, "NA");
    List<Problem>problemsList=new ArrayList<>();
    problemsList.add(problems);
@@ -37,8 +34,11 @@ public class CreateJobApiTest {
 
 		given()
 		.spec(SpecUtil.requestSpecWithAuth(UserRole.FD, payload))
+		.when()
 		.post("/job/create")
-		.then().log().all()
+		.then()
+		.log()
+		.all()
 		.statusCode(200)
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemaValidator/createJobApiSchema.json"))
 		.body("message",Matchers.equalTo("Job created successfully. "));	
