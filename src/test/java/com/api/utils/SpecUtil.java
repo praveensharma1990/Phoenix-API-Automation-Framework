@@ -13,7 +13,7 @@ import static com.api.utils.ConfigManager.*;
 import org.hamcrest.Matchers;
 
 import com.api.constant.UserRole;
-import com.api.pojo.UserCredencials;
+import com.api.request.model.UserCredencials;
 
 public class SpecUtil {
 
@@ -93,12 +93,5 @@ public class SpecUtil {
 				.log(LogDetail.BODY)
 				.log(LogDetail.METHOD)
 				.build();
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

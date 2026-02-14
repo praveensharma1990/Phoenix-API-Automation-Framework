@@ -7,13 +7,14 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import com.api.constant.UserRole;
-import com.api.pojo.CreateJobPayload;
-import com.api.pojo.Customer;
-import com.api.pojo.CustomerAddress;
-import com.api.pojo.CustomerProduct;
-import com.api.pojo.Problem;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problem;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.DateTimeProvider;
 import com.api.utils.SpecUtil;
 
 import static io.restassured.RestAssured.*;
@@ -27,7 +28,7 @@ public class CreateJobApiTest {
 	public void createJobApiTest() {
    Customer customer = new Customer("Ram", "Sharma", "9161759333", "", "psagra13@gmail.com", "psagra12@gmail.com");
    CustomerAddress customerAddress = new CustomerAddress("B 233", "Ajanja", "Vashundra", "noida", "near mother dairy", "201301", "Uttar Pradesh", "India");
-   CustomerProduct customerProduct=new CustomerProduct("23456781801705", "23456799101805", "23456689101105", "2025-09-30T18:30:00.000Z", "2025-09-30T18:30:00.000Z", 1, 1);
+   CustomerProduct customerProduct=new CustomerProduct("23456781801705", "23456799101805", "23456689101105",DateTimeProvider.getDateAndTimeDaysAgo(8), DateTimeProvider.getDateAndTimeDaysAgo(8), 1, 1);
    Problem problems=new Problem(3, "NA");
    List<Problem>problemsList=new ArrayList<>();
    problemsList.add(problems);
