@@ -2,26 +2,26 @@ name: Pheonix Test Automation Workflow
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
   schedule:
     - cron: "30 18 * * *"
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Select environment to run tests against'
+        description: "Select environment to run tests against"
         required: true
-        default: 'qa'
+        default: "qa"
         type: choice
         options:
           - qa
           - uat
           - dev
       testng_suite:
-        description: 'Select TestNG suite file to run'
+        description: "Select TestNG suite file to run"
         required: true
-        default: 'testng.xml'
+        default: "testng.xml"
         type: choice
         options:
           - testng.xml
@@ -33,17 +33,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: "17"
+          distribution: "temurin"
           cache: maven
 
+      - name: Set Default Values
+        id: defaults
+        run: |
+          echo "suiteXmlFile=${{ github.event.inputs.testng_suite || 'testng.xml' }}" >> $GITHUB_OUTPUT
+          echo "env=${{ github.event.inputs.environment || 'qa' }}" >> $GITHUB_OUTPUT
+
       - name: Execute test automation framework
-        run: mvn clean test -DsuiteXmlFile=${{ github.event.inputs.testng_suite }} -Denv=${{ github.event.inputs.environment }}
+        run: |
+          mvn clean test \
+            -DsuiteXmlFile=${{ steps.defaults.outputs.suiteXmlFile }} \
+            -Denv=${{ steps.defaults.outputs.env }}
 
       - name: Upload Surefire Report
         if: always()
