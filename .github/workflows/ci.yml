@@ -43,14 +43,11 @@ jobs:
           distribution: "temurin"
           cache: maven
 
-       -name: Default value for Execution
-       id: default
-       run: |
-           echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || testng.xml }}" >> $GITHUB_OUTPUT
-           echo "environment=${{ github.event.inputs.environment || 'qa' }} >> $GITHUB_OUTPUT
-
       - name: Execute test automation framework
-        run: mvn clean test -DsuiteXmlFile=${{ steps.default.outputs.suiteXmlFile }} -Denv=${{ steps.default.outputs.environment }}
+        run: |
+          mvn clean test \
+            -DsuiteXmlFile=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.testng_suite || 'testng.xml' }} \
+            -Denv=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'qa' }}
 
       - name: Upload Surefire Report
         if: always()
