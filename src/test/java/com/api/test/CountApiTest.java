@@ -1,24 +1,29 @@
 package com.api.test;
 
-import static io.restassured.RestAssured.*;
+import static com.api.constant.UserRole.FD;
+import static com.api.utils.ConfigManager.getProperty;
+import static io.restassured.RestAssured.enableLoggingOfRequestAndResponseIfValidationFails;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 
-import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
-
-import static com.api.constant.UserRole.*;
-import static com.api.utils.AuthTokenProvider.*;
-import static com.api.utils.ConfigManager.*;
+import static com.api.utils.SpecUtil.*;
 
 import io.restassured.http.ContentType;
-import io.restassured.module.jsv.JsonSchemaValidator;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class CountApiTest {
-	@Test()
+	@Test(description="validate count api response is correct",groups= {"smoke","regression"})
 	public void validateCountApiResponse() {
 		given()
-	 .spec(SpecUtil.requestSpecWithAuth(FD))
+	 .spec(requestSpecWithAuth(FD))
 	 .when()
 	 .get("dashboard/count")	
 	 .then()
@@ -29,25 +34,19 @@ public class CountApiTest {
 	 .body("data.size()",equalTo(3))
 	 .body("data.count",everyItem(greaterThanOrEqualTo(0)))
 	 .body("data.label", everyItem(not(blankOrNullString())))
-     .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schemaValidator/countApiSchema.json"))
-	 .log().all();
-	 
-		
+     .body(matchesJsonSchemaInClasspath("schemaValidator/countApiSchema.json"))
+	 .log().all();		
 		
 	}
-	@Test()
+	@Test(description="Validate Negative test for Invalid Token for Count API",groups= {"negative","smoke","regression"})
 	void validateMissingTokenInCountApi() {
-		enableLoggingOfRequestAndResponseIfValidationFails();
-		given()
+	  given()
 	 .baseUri(getProperty("BASE_URI"))
 	 .accept(ContentType.JSON)
 	 .when()
 	 .get("dashboard/count")	
 	 .then()
-	 .statusCode(401)
-	 .log().all();
-	 
-	
+	 .spec(responseSpecificationText(401));	
 		
 	}
 
