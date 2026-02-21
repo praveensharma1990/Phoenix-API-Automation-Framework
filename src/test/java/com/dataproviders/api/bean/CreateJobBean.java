@@ -25,7 +25,7 @@ public class CreateJobBean {
 	private String customer__email_id_alt;
     @CsvBindByName(column="customer_address__flat_number") 
 	private String customer_address__flat_number;
-    @CsvBindByName(column="ustomer_address__apartment_name") 
+    @CsvBindByName(column="customer_address__apartment_name") 
 	private String customer_address__apartment_name;
     @CsvBindByName(column="customer_address__street_name") 
 	private String customer_address__street_name;

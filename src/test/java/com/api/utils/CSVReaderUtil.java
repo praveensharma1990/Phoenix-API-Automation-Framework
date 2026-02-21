@@ -17,8 +17,8 @@ public class CSVReaderUtil {
 
     public static <T>Iterator<T> loadCSV(String pathOfCSVFile,Class<T> bean) {
     	
-    	InputStream inputSteam = Thread.currentThread().getContextClassLoader().getSystemResourceAsStream(pathOfCSVFile);
-    	InputStreamReader inputStreamReader = new InputStreamReader(inputSteam);
+    	InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOfCSVFile);
+    	InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
     	CSVReader csvReader = new CSVReader(inputStreamReader);
     	CsvToBean<T> csvToBean = new CsvToBeanBuilder(csvReader)
     			.withType(bean)
