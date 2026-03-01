@@ -1,0 +1,13 @@
+
+
+<suite name="Phoneix API Test" verbose="1">
+     <test name="In Warranty Flow Data Driven Test">
+    <classes>
+      
+      <class name="com.api.test.datadriven.LoginApiDataDrivenTest"/>
+      <class name="com.api.test.datadriven.CreateJobApiDataDrivenTest"/>
+      <class name="com.api.test.datadriven.CreateJobApiDataDrivenFakerTest"/>
+      
+    </classes>
+  </test>
+</suite>
