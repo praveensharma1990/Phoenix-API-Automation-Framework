@@ -27,6 +27,7 @@ on:
           - testng.xml
           - smoke.xml
           - regression.xml
+          - testng-datadriven.xml
 
 jobs:
   test:

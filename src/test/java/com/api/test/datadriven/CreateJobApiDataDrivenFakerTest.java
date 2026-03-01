@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import com.api.constant.UserRole;
 import com.api.request.model.CreateJobPayload;
 
-public class CreateJobApiDataDrivenTest {
+public class CreateJobApiDataDrivenFakerTest {
 		
 	@Test(description = "validate create job api response is correct for inwarranty", groups = { "dataDriven",
-			"regression","csv" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider="createJobAPIDataProvider")
+			"regression","faker" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider="createJobAPIFakerDataProvider")
 	public void createJobApiTest(CreateJobPayload createJobPayload) {
 		given()
 		.spec(requestSpecWithAuth(UserRole.FD, createJobPayload))
