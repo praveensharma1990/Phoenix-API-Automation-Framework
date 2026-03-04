@@ -1,0 +1,113 @@
+[
+  {
+    "mst_service_location_id": 1,
+    "mst_platform_id": 2,
+    "mst_warrenty_status_id": 1,
+    "mst_oem_id": 1,
+    "customer": {
+      "first_name": "Krishna",
+      "last_name": "Singh",
+      "mobile_number": "9999999999",
+      "mobile_number_alt": "8888888866",
+      "email_id": "px@gmail.com",
+      "email_id_alt": "xyz@gmail.com"
+    },
+    "customer_address": {
+      "flat_number": "xyz",
+      "apartment_name": "abc",
+      "street_name": "AGRA",
+      "landmark": "NA",
+      "area": "Noida",
+      "pincode": "330033",
+      "country": "India",
+      "state": "Chhattisgarh"
+    },
+    "customer_product": {
+      "dop": "2026-02-28T18:30:00.000Z",
+      "serial_number": "01122334455667710",
+      "imei1": "01122334455667710",
+      "imei2": "",
+      "popurl": "https://example.com/invoice1.pdf",
+      "product_id": 1,
+      "mst_model_id": 1
+    },
+    "problems": [
+      { "id": 2, "remark": "NA" },
+      { "id": 4, "remark": "NS" }
+    ]
+  },
+  {
+    "mst_service_location_id": 1,
+    "mst_platform_id": 2,
+    "mst_warrenty_status_id": 1,
+    "mst_oem_id": 1,
+    "customer": {
+      "first_name": "Krishna",
+      "last_name": "Singh",
+      "mobile_number": "9999999999",
+      "mobile_number_alt": "8888888866",
+      "email_id": "px@gmail.com",
+      "email_id_alt": "xyz@gmail.com"
+    },
+    "customer_address": {
+      "flat_number": "xyz",
+      "apartment_name": "abc",
+      "street_name": "AGRA",
+      "landmark": "NA",
+      "area": "Noida",
+      "pincode": "330033",
+      "country": "India",
+      "state": "Chhattisgarh"
+    },
+    "customer_product": {
+      "dop": "2026-02-28T18:30:00.000Z",
+      "serial_number": "01122334455667711",
+      "imei1": "01122334455667711",
+      "imei2": "",
+      "popurl": "https://example.com/invoice2.pdf",
+      "product_id": 1,
+      "mst_model_id": 1
+    },
+    "problems": [
+      { "id": 2, "remark": "NA" },
+      { "id": 4, "remark": "NS" }
+    ]
+  },
+  {
+    "mst_service_location_id": 1,
+    "mst_platform_id": 2,
+    "mst_warrenty_status_id": 1,
+    "mst_oem_id": 1,
+    "customer": {
+      "first_name": "Krishna",
+      "last_name": "Singh",
+      "mobile_number": "9999999999",
+      "mobile_number_alt": "8888888866",
+      "email_id": "px@gmail.com",
+      "email_id_alt": "xyz@gmail.com"
+    },
+    "customer_address": {
+      "flat_number": "xyz",
+      "apartment_name": "abc",
+      "street_name": "AGRA",
+      "landmark": "NA",
+      "area": "Noida",
+      "pincode": "330033",
+      "country": "India",
+      "state": "Chhattisgarh"
+    },
+    "customer_product": {
+      "dop": "2026-02-28T18:30:00.000Z",
+      "serial_number": "01122334455667712",
+      "imei1": "01122334455667712",
+      "imei2": "",
+      "popurl": "https://example.com/invoice3.pdf",
+      "product_id": 1,
+      "mst_model_id": 1
+    },
+    "problems": [
+      { "id": 2, "remark": "NA" },
+      { "id": 4, "remark": "NS" }
+    ]
+  }
+]
