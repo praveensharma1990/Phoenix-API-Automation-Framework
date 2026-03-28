@@ -14,7 +14,7 @@ public class ExcelReaderUtil2 {
 	private ExcelReaderUtil2() {
 	}
 
-	public static <T> Iterator<T> excelReader(String excelFilePath ,Class<T> class1) {
+	public static <T> Iterator<T> excelReader(String excelFilePath ,String sheetName,Class<T> class1) {
 
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(excelFilePath);
 		XSSFWorkbook myWorkbook = null;
@@ -23,7 +23,7 @@ public class ExcelReaderUtil2 {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		XSSFSheet mySheet = myWorkbook.getSheet("LoginTestData");
+		XSSFSheet mySheet = myWorkbook.getSheet(sheetName);
 	List<T>dataList = Poiji.fromExcel(mySheet, class1);
 	return dataList.iterator();
 		
