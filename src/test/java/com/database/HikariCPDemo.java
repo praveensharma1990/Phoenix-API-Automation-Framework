@@ -12,12 +12,19 @@ import com.zaxxer.hikari.HikariDataSource;
 public class HikariCPDemo {
 
 	public static void main(String[] args) throws SQLException {
-		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl(ConfigManager.getProperty("DB_URL"));
-		config.setUsername(ConfigManager.getProperty("DB_USER_NAME"));
-		config.setPassword(ConfigManager.getProperty("DB_PASSWORD"));
-		HikariDataSource dSource = new HikariDataSource(config);
-		Connection connection = dSource.getConnection();
+		HikariConfig hikariConfig = new HikariConfig();
+		hikariConfig.setJdbcUrl(ConfigManager.getProperty("DB_URL"));
+		hikariConfig.setUsername(ConfigManager.getProperty("DB_USER_NAME"));
+		hikariConfig.setPassword(ConfigManager.getProperty("DB_PASSWORD"));
+		hikariConfig.setMaximumPoolSize(10);
+		hikariConfig.setMinimumIdle(2);
+		hikariConfig.setMaxLifetime(1800000);
+		hikariConfig.setConnectionTimeout(100000);
+		hikariConfig.setIdleTimeout(10000);
+		hikariConfig.setPoolName("Phoenix Test Automation Framework Pool");
+		
+		HikariDataSource dataSource = new HikariDataSource(hikariConfig);
+		Connection connection = dataSource.getConnection();
 
 		System.out.println("Connection establised " + connection);
 		Statement statement =connection.createStatement();
@@ -27,7 +34,7 @@ public class HikariCPDemo {
 			String last_Name = resultSet.getString("last_name");
 			String mobile_number = resultSet.getString("mobile_number");
 			System.out.printf("%-20s %-20s %-15s%n", first_Name, last_Name, mobile_number);
-		}
+		} dataSource.close();
 
 	}
 
