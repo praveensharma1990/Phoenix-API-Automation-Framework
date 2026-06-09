@@ -67,7 +67,7 @@ public class CreateJobPayloadDataDao {
 			resultSet = statement.executeQuery(SQL_QUERY);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		try {
