@@ -53,10 +53,10 @@ public class CreateJobPayloadDataDao {
 				tr_job_head.tr_customer_id = tr_customer.id
 			INNER JOIN map_job_problem on
 				tr_job_head.id = map_job_problem.tr_job_head_id
-			LIMIT 6;
+			LIMIT 5;
 			""";
 
-	public static void getCreateJobPayloadData() {
+	public static List<CreateJobBean> getCreateJobPayloadData() {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
@@ -67,7 +67,7 @@ public class CreateJobPayloadDataDao {
 			resultSet = statement.executeQuery(SQL_QUERY);
 
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		try {
@@ -100,14 +100,13 @@ public class CreateJobPayloadDataDao {
 				bean.setMst_warrenty_status_id(resultSet.getString("mst_warrenty_status_id"));
 				bean.setProblems__id(resultSet.getString("mst_problem_id"));
 				bean.setProblems__remark(resultSet.getString("remark"));
-				
+
 				listOfBeans.add(bean);
-	
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		  listOfBeans.forEach(x->System.out.println(x));
-	}
+		} return listOfBeans;
+	} 
 }
