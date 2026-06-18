@@ -25,10 +25,7 @@ public class ExcelReaderUtil2 {
 		}
 		XSSFSheet mySheet = myWorkbook.getSheet(sheetName);
 	List<T>dataList = Poiji.fromExcel(mySheet, class1);
-	return dataList.iterator();
-		
-		 
-		
+	return dataList.iterator();		
 
 	}
 }
