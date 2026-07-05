@@ -55,6 +55,8 @@ public class CreateJobPayloadDataDao {
 				tr_job_head.id = map_job_problem.tr_job_head_id
 			LIMIT 5;
 			""";
+	
+	private CreateJobPayloadDataDao() {}
 
 	public static List<CreateJobBean> getCreateJobPayloadData() {
 		Connection connection = null;
