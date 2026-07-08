@@ -15,8 +15,10 @@ import com.api.request.model.CustomerAddress;
 import com.api.utils.FakerDataGenerator;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
+import com.database.dao.JobHeadDao;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
+import com.database.model.JobHeadModel;
 
 import static com.api.utils.SpecUtil.*;
 
@@ -48,7 +50,8 @@ public class CreateJobApiWithFakerTest {
 		Assert.assertEquals(expectedCustomerData.email_id(), actualCustomerDataInDB.getEmail_id());
 		Assert.assertEquals(expectedCustomerData.email_id_alt(), actualCustomerDataInDB.getEmail_id_alt());
 
-		CustomerAddressDBModel actualCustomerAddress = CustomerAddressDao.getCustomerAddressData(actualCustomerDataInDB.getTr_customer_address_id());
+		CustomerAddressDBModel actualCustomerAddress = CustomerAddressDao
+				.getCustomerAddressData(actualCustomerDataInDB.getTr_customer_address_id());
 		CustomerAddress expectedCustomerAddress = payload.customer_address();
 		Assert.assertEquals(expectedCustomerAddress.flat_number(), actualCustomerAddress.getFlat_number());
 		Assert.assertEquals(expectedCustomerAddress.apartment_name(), actualCustomerAddress.getApartment_name());
@@ -59,5 +62,12 @@ public class CreateJobApiWithFakerTest {
 		Assert.assertEquals(expectedCustomerAddress.pincode(), actualCustomerAddress.getPincode());
 		Assert.assertEquals(expectedCustomerAddress.state(), actualCustomerAddress.getState());
 		Assert.assertEquals(expectedCustomerAddress.country(), actualCustomerAddress.getCountry());
+
+		JobHeadModel jobHeadAcctualData = JobHeadDao.getJobHeadData(customerID);
+		Assert.assertEquals(payload.mst_oem_id(), jobHeadAcctualData.getMst_oem_id());
+		Assert.assertEquals(payload.mst_platform_id(), jobHeadAcctualData.getMst_oem_id());
+		Assert.assertEquals(payload.mst_service_location_id(), jobHeadAcctualData.getMst_service_location_id());
+		Assert.assertEquals(payload.mst_warrenty_status_id(), jobHeadAcctualData.getMst_warrenty_status_id());
+
 	}
 }

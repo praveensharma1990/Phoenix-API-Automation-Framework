@@ -30,9 +30,13 @@ import com.api.response.model.CreateJobResponseModel;
 import com.database.dao.CustomerAddressDao;
 import com.database.dao.CustomerDao;
 import com.database.dao.CustomerProductDao;
+import com.database.dao.JobHeadDao;
+import com.database.dao.MapJobProbelmDao;
 import com.database.model.CustomerAddressDBModel;
 import com.database.model.CustomerDBModel;
 import com.database.model.CustomerProductDBModel;
+import com.database.model.JobHeadModel;
+import com.database.model.MapJobProblemModel;
 
 public class CreateJobApiDBValidationTest2 {
 	private CreateJobPayload payload;
@@ -43,7 +47,7 @@ public class CreateJobApiDBValidationTest2 {
 		customer = new Customer("Ram", "Sharma", "9161759333", "", "psagra13@gmail.com", "psagra12@gmail.com");
 		CustomerAddress customerAddress = new CustomerAddress("B 233", "Ajanja", "Vashundra", "noida",
 				"near mother dairy", "201301", "Uttar Pradesh", "India");
-		CustomerProduct customerProduct = new CustomerProduct("23456781801015", "23456781801015", "23456781801015",
+		CustomerProduct customerProduct = new CustomerProduct("23456781801011", "23456781801011", "23456781801011",
 				getDateAndTimeDaysAgo(8), getDateAndTimeDaysAgo(8), product.NEXUS_2.getCode(),
 				Model.NEXUS_2_BLUE.getModelCode());
 		Problem problems = new Problem(Problems.POOR_BATTERY_LIFE.getCode(), "Battery Backup is only 30 minuts");
@@ -96,6 +100,16 @@ public class CreateJobApiDBValidationTest2 {
 		Assert.assertEquals(customerProductExpected.dop().substring(0,10), customerProductActual.getDop().substring(0,10));
 		Assert.assertEquals(customerProductExpected.popurl(), customerProductActual.getPopurl());
 		Assert.assertEquals(customerProductExpected.serial_number(), customerProductActual.getSerial_number());
+		
+		JobHeadModel jobHeadAcctualData = JobHeadDao.getJobHeadData(customerId);
+		Assert.assertEquals(payload.mst_oem_id(), jobHeadAcctualData.getMst_oem_id());
+		Assert.assertEquals(payload.mst_platform_id(), jobHeadAcctualData.getMst_platform_id());
+		Assert.assertEquals(payload.mst_service_location_id(), jobHeadAcctualData.getMst_service_location_id());
+		
+		int job_head_id = createJobResponseModel.getData().getId();
+		MapJobProblemModel problemDataFromDB = MapJobProbelmDao.getProblemDetails(job_head_id);
+		Assert.assertEquals(payload.problems().getFirst().id(), problemDataFromDB.getMst_problem_id());
+		Assert.assertEquals(payload.problems().getFirst().remark(), problemDataFromDB.getRemark());
 
 	}
 }
