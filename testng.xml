@@ -9,6 +9,9 @@
       <class name="com.api.test.CountApiTest"/>
       <class name="com.api.test.MasterApiTest"/>
       <class name="com.api.test.CreateJobApiTest"/>
+      <class name="com.api.test.CreateJobApiTest"/>
+      <class name="com.api.test.CreateJobApiDBValidationTest"/>
+      <class name="com.api.test.CreateJobApiDBValidationWithResponseModelTest"/>
       
       
     </classes>
