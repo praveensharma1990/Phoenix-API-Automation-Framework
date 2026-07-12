@@ -44,6 +44,12 @@ jobs:
           distribution: "temurin"
           cache: maven
 
+      - name: Create .env file
+        run: |
+          echo "DB_URL=${{ secrets.DB_URL }}" > .env
+          echo "DB_USER_NAME=${{ secrets.DB_USER_NAME }}" >> .env
+          echo "DB_USER_PASSWORD=${{ secrets.DB_USER_PASSWORD }}" >> .env
+
       - name: Execute test automation framework
         run: |
           mvn clean test \
