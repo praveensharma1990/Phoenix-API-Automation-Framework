@@ -2,11 +2,16 @@ name: Pheonix Test Automation Workflow
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - master
+
   pull_request:
-    branches: ["master"]
+    branches:
+      - master
+
   schedule:
     - cron: "30 18 * * *"
+
   workflow_dispatch:
     inputs:
       environment:
@@ -18,6 +23,7 @@ on:
           - qa
           - uat
           - dev
+
       testng_suite:
         description: "Select TestNG suite file to run"
         required: true
@@ -43,6 +49,17 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
+
+      - name: Create .env file
+        run: |
+          echo "DB_URL=${{ secrets.DB_URL }}" > .env
+          echo "DB_USER_NAME=${{ secrets.DB_USER_NAME }}" >> .env
+          echo "DB_USER_PASSWORD=${{ secrets.DB_USER_PASSWORD }}" >> .env
+
+      - name: Verify .env file
+        run: |
+          ls -la
+          cat .env | cut -d= -f1
 
       - name: Execute test automation framework
         run: |
