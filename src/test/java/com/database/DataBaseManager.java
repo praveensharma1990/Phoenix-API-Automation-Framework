@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.api.utils.ConfigManager;
+import com.api.utils.EnvUtil;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -14,9 +15,9 @@ import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
 
 public class DataBaseManager {
-	private static final String DB_URL = ConfigManager.getProperty("DB_URL");
-	private static final String DB_USER_NAME = ConfigManager.getProperty("DB_USER_NAME");
-	private static final String DB_PASSWORD = ConfigManager.getProperty("DB_PASSWORD");
+	private static final String DB_URL = EnvUtil.getValue("DB_URL");
+	private static final String DB_USER_NAME = EnvUtil.getValue("DB_USER_NAME");
+	private static final String DB_PASSWORD = EnvUtil.getValue("DB_PASSWORD");
 	private static final int MAXIUM_POOL_SIZE = Integer.parseInt(ConfigManager.getProperty("MAXIUM_POOL_SIZE"));
 	private static final int MINIMUM_IDLE_COUNT = Integer.parseInt(ConfigManager.getProperty("MINIMUM_IDLE_COUNT"));
 	private static final int MAX_LIFE_TIME_IN_MINS = Integer
