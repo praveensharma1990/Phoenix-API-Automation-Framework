@@ -48,7 +48,7 @@ public class CreateJobApiDBValidationTest {
 		customer = new Customer("Ram", "Sharma", "9161759333", "", "psagra13@gmail.com", "psagra12@gmail.com");
 		CustomerAddress customerAddress = new CustomerAddress("B 233", "Ajanja", "Vashundra", "noida",
 				"near mother dairy", "201301", "Uttar Pradesh", "India");
-		CustomerProduct customerProduct = new CustomerProduct("111156781801777", "111156781801777", "111156781801777",
+		CustomerProduct customerProduct = new CustomerProduct("111156781801111", "111156781801111", "111156781801111",
 				getDateAndTimeDaysAgo(8), getDateAndTimeDaysAgo(8), product.NEXUS_2.getCode(),
 				Model.NEXUS_2_BLUE.getModelCode());
 		Problem problems = new Problem(Problems.POOR_BATTERY_LIFE.getCode(), "Battery Backup is only 30 minuts");
