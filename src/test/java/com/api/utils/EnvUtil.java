@@ -13,8 +13,8 @@ public class EnvUtil {
 		dotenv = Dotenv.load();
 	}
 	
-	public static String getValue(String valuename) {
-		return dotenv.get(valuename);
+	public static String getValue(String varName) {
+		return dotenv.get(varName);
 	}
 
 }

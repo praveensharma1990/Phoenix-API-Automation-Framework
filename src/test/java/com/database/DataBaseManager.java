@@ -8,6 +8,8 @@ import java.sql.Statement;
 
 import com.api.utils.ConfigManager;
 import com.api.utils.EnvUtil;
+import com.api.utils.ValtDBConfig;
+import com.google.common.cache.LoadingCache;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -15,9 +17,6 @@ import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
 import groovyjarjarantlr4.v4.parse.ANTLRParser.throwsSpec_return;
 
 public class DataBaseManager {
-	private static final String DB_URL = EnvUtil.getValue("DB_URL");
-	private static final String DB_USER_NAME = EnvUtil.getValue("DB_USER_NAME");
-	private static final String DB_PASSWORD = EnvUtil.getValue("DB_PASSWORD");
 	private static final int MAXIUM_POOL_SIZE = Integer.parseInt(ConfigManager.getProperty("MAXIUM_POOL_SIZE"));
 	private static final int MINIMUM_IDLE_COUNT = Integer.parseInt(ConfigManager.getProperty("MINIMUM_IDLE_COUNT"));
 	private static final int MAX_LIFE_TIME_IN_MINS = Integer
@@ -30,6 +29,32 @@ public class DataBaseManager {
 
 	private static HikariConfig hikariConfig;
 	private static volatile HikariDataSource hikariDataSource;
+	private static boolean isVaultUp = true;
+	private static final String DB_URL = loadSecret("DB_URL");
+	private static final String DB_USER_NAME = loadSecret("DB_USER_NAME");
+	private static final String DB_PASSWORD = loadSecret("DB_PASSWORD");
+	
+	
+	public static String loadSecret(String key) {
+		String value = null;
+		if(isVaultUp) {
+		value = ValtDBConfig.getSecretes(key);
+		if(value==null) {
+			System.err.print("vault is down or something is not working!!");
+			isVaultUp = false;
+		}
+		
+		else {
+			System.out.println("Getting Secrets from Vault.....");
+			return value;
+		}
+		}
+		value = EnvUtil.getValue(key);
+		System.out.println("Getting Secrets from .ENV");
+				return value;
+	}
+	
+	
 
 	private DataBaseManager() {
 	}
