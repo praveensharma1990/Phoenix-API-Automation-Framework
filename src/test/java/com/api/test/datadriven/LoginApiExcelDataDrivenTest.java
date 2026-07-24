@@ -1,6 +1,6 @@
 package com.api.test.datadriven;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
@@ -8,14 +8,17 @@ import static org.hamcrest.Matchers.notNullValue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredencials;
+import com.api.services.AuthService;
 import com.dataproviders.api.bean.UserBean;
 
-import static com.api.utils.SpecUtil.*;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
 public class LoginApiExcelDataDrivenTest {
+	
+	private AuthService authService;
+
+	@BeforeMethod(description = "Initialize AuthService")
+	public void setup() {
+		authService = new AuthService();
+	}
 	
 
 	@Test(description = "Varify Login Funtionality is working for valid user",
@@ -24,10 +27,7 @@ public class LoginApiExcelDataDrivenTest {
 			dataProvider = "loginApiExcelDataprovider"	
 			)
 	public void loginApiTest(UserBean userben) {
-		given()
-		.spec(requestSpec(userben))
-		.when()
-		.post("login")
+		authService.login(userben)
 		.then()
 		.statusCode(200)
 		.body("message", equalTo("Success"))

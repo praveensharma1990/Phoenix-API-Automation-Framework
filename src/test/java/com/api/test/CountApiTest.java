@@ -12,7 +12,10 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.api.services.DashboardService;
 
 import static com.api.utils.SpecUtil.*;
 
@@ -20,12 +23,17 @@ import io.restassured.http.ContentType;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class CountApiTest {
+	private DashboardService dashboardService;
+	
+	@BeforeMethod(description = "Instanciate dashboard service")
+	public void setup()
+	{
+		dashboardService = new DashboardService();
+	}
+	
 	@Test(description="validate count api response is correct",groups= {"smoke","regression"})
 	public void validateCountApiResponse() {
-		given()
-	 .spec(requestSpecWithAuth(FD))
-	 .when()
-	 .get("dashboard/count")	
+	 dashboardService.count(FD)		
 	 .then()
 	 .statusCode(200)
 	 .body("message", equalTo("Success"))
@@ -40,11 +48,7 @@ public class CountApiTest {
 	}
 	@Test(description="Validate Negative test for Invalid Token for Count API",groups= {"negative","smoke","regression"})
 	void validateMissingTokenInCountApi() {
-	  given()
-	 .baseUri(getProperty("BASE_URI"))
-	 .accept(ContentType.JSON)
-	 .when()
-	 .get("dashboard/count")	
+	  dashboardService.countWithNoAuth()	
 	 .then()
 	 .spec(responseSpecificationText(401));	
 		

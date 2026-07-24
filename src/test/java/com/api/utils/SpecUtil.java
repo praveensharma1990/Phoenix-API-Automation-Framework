@@ -54,8 +54,7 @@ public class SpecUtil {
 				.log(LogDetail.BODY)
 				.log(LogDetail.METHOD)
 				.build();
-	}
-	
+	}	
 	
 	public static ResponseSpecification responseSpecification() {
 	return new ResponseSpecBuilder()
