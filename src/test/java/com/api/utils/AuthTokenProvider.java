@@ -5,6 +5,9 @@ import static io.restassured.RestAssured.given;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.api.constant.UserRole;
 import com.api.request.model.UserCredencials;
 
@@ -13,6 +16,7 @@ import io.restassured.http.ContentType;
 public class AuthTokenProvider {
 	private static Map<UserRole, String> tokenCace = new ConcurrentHashMap<UserRole, String>();
 	private static String token;
+	private static final Logger LOGGER = LogManager.getLogger(AuthTokenProvider.class);
 
 	private AuthTokenProvider() {
 		// private constructor to prevent instantiation
@@ -20,12 +24,13 @@ public class AuthTokenProvider {
 	
 	
 	public static String getToken(UserRole role) {
+		LOGGER.info("checking if token is available in the cache for the role {}",role);
 		if(tokenCace.containsKey(role)) {
-			       return tokenCace.get(role);
+			LOGGER.info("token found for the role {}",role);
+			       return tokenCace.get(role);		       
 			
-		}
-		
-		else {
+		}	
+		LOGGER.info("Generating Token for the role {}",role);
 		UserCredencials userCredentials = switch (role) {
 		case FD -> new UserCredencials("iamfd", "password");
 		case SUP -> new UserCredencials("iamsup", "password");
@@ -40,6 +45,6 @@ public class AuthTokenProvider {
 		   tokenCace.put(role, token);
 		   return token;	
 
-	}
+	
 }
 }

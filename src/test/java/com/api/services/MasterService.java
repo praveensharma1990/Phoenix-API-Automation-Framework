@@ -3,6 +3,9 @@ package com.api.services;
 import static com.api.utils.SpecUtil.requestSpecWithAuth;
 import static io.restassured.RestAssured.given;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.api.constant.UserRole;
 import com.api.utils.SpecUtil;
 
@@ -11,8 +14,10 @@ import io.restassured.response.Response;
 public class MasterService {
 
 	private static final String MASTER_ENDPOINT = "/master";
+	private static final Logger LOGGER = LogManager.getLogger(MasterService.class);
 	
 	public Response master(UserRole role) {
+		LOGGER.info("Making request for {} with the role {}",MASTER_ENDPOINT,role);
 	return given()
 		.spec(requestSpecWithAuth(role))
 		.when()
@@ -21,6 +26,7 @@ public class MasterService {
 	}
 	
 	public Response masterWithoutAuth() {
+		LOGGER.info("Making request for {}",MASTER_ENDPOINT);
 		return given()
 			.spec(SpecUtil.requestSpec())
 			.when()
