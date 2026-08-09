@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import com.api.request.model.UserCredencials;
 import com.api.services.AuthService;
+import com.dataproviders.api.bean.UserBean;
 
 public class LoginApiJsonDataDrivenTest {
 	private AuthService authService;
@@ -21,7 +22,7 @@ public class LoginApiJsonDataDrivenTest {
 
 	@Test(description = "Varify Login Funtionality is working for valid user", groups = { "smoke", "regression",
 			"datadriven" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "loginApiJsonDataprovider")
-	public void loginApiTest(UserCredencials usercredencial) {
+	public void loginApiTest(UserBean usercredencial) {
 		authService.login(usercredencial)
 		.then()
 		.statusCode(200)

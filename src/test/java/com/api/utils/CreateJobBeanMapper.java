@@ -3,6 +3,9 @@ package com.api.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -10,49 +13,45 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problem;
 import com.dataproviders.api.bean.CreateJobBean;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
+
 public class CreateJobBeanMapper {
-	
+	private static final Logger LOGGER = LogManager.getLogger(CreateJobBeanMapper.class);
+
 	private CreateJobBeanMapper() {
-		
+
 	}
-	
+
 	public static CreateJobPayload beanMapper(CreateJobBean bean) {
-		
+		LOGGER.info("converting the create job Bean {} to create job payload..", bean);
 		int mstServiceLocationId = Integer.parseInt(bean.getMst_service_location_id());
 		int mstPlatformId = Integer.parseInt(bean.getMst_platform_id());
 		int mstWarrantyStatusId = Integer.parseInt(bean.getMst_warrenty_status_id());
 		int oemId = Integer.parseInt(bean.getMst_oem_id());
 		int mstModelId = Integer.parseInt(bean.getCustomer_product__mst_model_id());
 		int mstProductId = Integer.parseInt(bean.getCustomer_product__product_id());
-				
-		Customer customer = new Customer(bean.getCustomer__first_name(), 
-				bean.getCustomer__last_name(),
-				bean.getCustomer__mobile_number(), 
-				bean.getCustomer__mobile_number_alt(), 
-				bean.getCustomer__email_id(),bean.getCustomer__email_id_alt());
+
+		Customer customer = new Customer(bean.getCustomer__first_name(), bean.getCustomer__last_name(),
+				bean.getCustomer__mobile_number(), bean.getCustomer__mobile_number_alt(), bean.getCustomer__email_id(),
+				bean.getCustomer__email_id_alt());
 		CustomerAddress customerAddress = new CustomerAddress(bean.getCustomer_address__flat_number(),
-				bean.getCustomer_address__apartment_name(),
-				bean.getCustomer_address__street_name(),
-				bean.getCustomer_address__area(),
-				bean.getCustomer_address__landmark(),
-				bean.getCustomer_address__pincode(),
-				bean.getCustomer_address__state(),
+				bean.getCustomer_address__apartment_name(), bean.getCustomer_address__street_name(),
+				bean.getCustomer_address__area(), bean.getCustomer_address__landmark(),
+				bean.getCustomer_address__pincode(), bean.getCustomer_address__state(),
 				bean.getCustomer_address__country());
 		CustomerProduct customerProduct = new CustomerProduct(bean.getCustomer_product__serial_number(),
-				bean.getCustomer_product__imei1(),
-				bean.getCustomer_product__imei2(),
-				bean.getCustomer_product__dop(),
-				bean.getCustomer_product__popurl(),
-				mstModelId,
-				mstProductId);
-		int problemId=Integer.parseInt(bean.getProblems__id());
-		List<Problem>problemList=new ArrayList<>();
-		Problem problem = new Problem(problemId, bean.getProblems__remark());		
+				bean.getCustomer_product__imei1(), bean.getCustomer_product__imei2(), bean.getCustomer_product__dop(),
+				bean.getCustomer_product__popurl(), mstModelId, mstProductId);
+		int problemId = Integer.parseInt(bean.getProblems__id());
+		List<Problem> problemList = new ArrayList<>();
+		Problem problem = new Problem(problemId, bean.getProblems__remark());
 		problemList.add(problem);
-		
-		return new CreateJobPayload(mstServiceLocationId, mstPlatformId,
-				mstWarrantyStatusId, oemId, customer, customerAddress, customerProduct,problemList);
-		
+
+		CreateJobPayload payload = new CreateJobPayload(mstServiceLocationId, mstPlatformId, mstWarrantyStatusId, oemId,
+				customer, customerAddress, customerProduct, problemList);
+		LOGGER.info("converted the create job bean to create job payload {}", payload);
+		return payload;
+
 	}
 
 }

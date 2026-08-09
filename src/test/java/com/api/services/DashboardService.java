@@ -3,20 +3,22 @@ package com.api.services;
 import static com.api.utils.SpecUtil.requestSpecWithAuth;
 import static io.restassured.RestAssured.given;
 
-import javax.management.relation.Role;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.api.constant.UserRole;
 import com.api.utils.SpecUtil;
 
-import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
 import io.restassured.response.Response;
 
 public class DashboardService {
 	
 	private static final String COUNT_ENDPOINT = "/dashboard/count";
 	private static final String DETAILS_ENDPOINT = "/dashboard/details";
+	private static final Logger LOGGER = LogManager.getLogger(DashboardService.class);
 	
 	public Response count(UserRole role) {
+    LOGGER.info("Making request to the {} for the role {}",COUNT_ENDPOINT,role);		
 	return	given()
 		 .spec(requestSpecWithAuth(role))
 		 .when()
@@ -24,6 +26,7 @@ public class DashboardService {
 	}
 	
 	public Response countWithNoAuth() {
+		LOGGER.info("Making request to the {}",COUNT_ENDPOINT);
 		return	given()
 		     .spec(SpecUtil.requestSpec())
 			 .when()
@@ -31,6 +34,7 @@ public class DashboardService {
 		}
 	
 	public Response details(UserRole role,Object payload) {
+		LOGGER.info("Making request to the {} with role {} and the payload{}",COUNT_ENDPOINT,role);	
 		return given()
 				.spec(SpecUtil.requestSpecWithAuth(role,payload))
 				.when()

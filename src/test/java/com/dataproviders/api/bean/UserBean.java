@@ -3,6 +3,8 @@ package com.dataproviders.api.bean;
 import com.opencsv.bean.CsvBindByName;
 import com.poiji.annotation.ExcelCellName;
 
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 public class UserBean {
 	@ExcelCellName("username")
 	@CsvBindByName(column="username")

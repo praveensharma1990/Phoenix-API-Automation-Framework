@@ -7,10 +7,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.database.DataBaseManager;
 import com.dataproviders.api.bean.CreateJobBean;
 
 public class CreateJobPayloadDataDao {
+	private static Logger lOGGER = LogManager.getLogger(CreateJobPayloadDataDao.class);
 	private static final String SQL_QUERY = """
 
 				SELECT
@@ -55,8 +59,9 @@ public class CreateJobPayloadDataDao {
 				tr_job_head.id = map_job_problem.tr_job_head_id
 			LIMIT 5;
 			""";
-	
-	private CreateJobPayloadDataDao() {}
+
+	private CreateJobPayloadDataDao() {
+	}
 
 	public static List<CreateJobBean> getCreateJobPayloadData() {
 		Connection connection = null;
@@ -64,15 +69,12 @@ public class CreateJobPayloadDataDao {
 		ResultSet resultSet = null;
 		List<CreateJobBean> listOfBeans = new ArrayList<>();
 		try {
+			lOGGER.info("Getting the connection from the Database Manager");
 			connection = DataBaseManager.getConnection();
 			statement = connection.createStatement();
+			lOGGER.info("Executing the query...{}", SQL_QUERY);
 			resultSet = statement.executeQuery(SQL_QUERY);
 
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		try {
 			while (resultSet.next()) {
 				CreateJobBean bean = new CreateJobBean();
 				bean.setCustomer__first_name(resultSet.getString("first_name"));
@@ -107,8 +109,9 @@ public class CreateJobPayloadDataDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		    lOGGER.error("Can not Convert the result to create job bean", e);
 			e.printStackTrace();
-		} return listOfBeans;
-	} 
+		}
+		return listOfBeans;
+	}
 }
