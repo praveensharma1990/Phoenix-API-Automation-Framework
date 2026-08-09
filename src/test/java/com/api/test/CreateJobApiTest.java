@@ -52,7 +52,7 @@ public class CreateJobApiTest {
 		jobService = new JobService();
 
 	}
-
+     
 	@Test(description = "validate create job api response is correct for inwarranty", groups = { "smoke",
 			"regression" })
 	public void createJobApiTest() {

@@ -1,18 +1,17 @@
 package com.api.test;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import com.api.request.model.UserCredencials;
 import com.api.services.AuthService;
 import com.dataproviders.api.bean.UserBean;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
+@Listeners(com.listeners.APITestListener.class)
 public class LoginApiTest {
 	private UserBean usercredencials;
 	private AuthService authService;
