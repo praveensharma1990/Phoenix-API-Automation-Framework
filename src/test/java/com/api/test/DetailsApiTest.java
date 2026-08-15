@@ -2,12 +2,13 @@ package com.api.test;
 
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constant.UserRole;
 import com.api.request.model.Detail;
 import com.api.services.DashboardService;
-
+@Listeners(com.listeners.APITestListener.class)
 public class DetailsApiTest {
 	
 	private DashboardService dashboardService;

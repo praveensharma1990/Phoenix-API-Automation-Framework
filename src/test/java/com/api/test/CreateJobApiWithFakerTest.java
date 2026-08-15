@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constant.UserRole;
@@ -23,7 +24,7 @@ import com.database.model.JobHeadModel;
 import static com.api.utils.SpecUtil.*;
 
 import static io.restassured.RestAssured.*;
-
+@Listeners(com.listeners.APITestListener.class)
 public class CreateJobApiWithFakerTest {
 	private CreateJobPayload payload;
 

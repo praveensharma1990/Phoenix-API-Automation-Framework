@@ -5,13 +5,14 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.services.AuthService;
 import com.dataproviders.api.bean.UserBean;
 
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
-
+@Listeners(com.listeners.APITestListener.class)
 public class LoginApiDataDrivenTest {
 	private AuthService authService;
 

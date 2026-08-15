@@ -5,6 +5,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constant.Model;
@@ -29,7 +30,7 @@ import static io.restassured.RestAssured.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Listeners(com.listeners.APITestListener.class)
 public class CreateJobApiTest {
 	private CreateJobPayload payload;
 	private JobService jobService;
