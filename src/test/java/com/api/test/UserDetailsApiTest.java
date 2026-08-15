@@ -4,11 +4,12 @@ import static com.api.utils.SpecUtil.responseSpecification;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.constant.UserRole;
 import com.api.services.UserService;
-
+@Listeners(com.listeners.APITestListener.class)
 public class UserDetailsApiTest {
 	
 	private UserService userDetailsService;

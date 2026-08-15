@@ -13,6 +13,7 @@ import static com.api.utils.ConfigManager.*;
 import org.hamcrest.Matchers;
 
 import com.api.constant.UserRole;
+import com.api.filters.SensitiveDataFilter;
 import com.api.request.model.UserCredencials;
 
 public class SpecUtil {
@@ -22,10 +23,7 @@ public class SpecUtil {
 				.setBaseUri(getProperty("BASE_URI"))
 				.setAccept(ContentType.JSON)
 				.setContentType(ContentType.JSON)
-				.log(LogDetail.URI)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
-				.log(LogDetail.METHOD)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 		
 
@@ -37,10 +35,7 @@ public class SpecUtil {
 				.setAccept(ContentType.JSON)
 				.setContentType(ContentType.JSON)
 				.setBody(payload)
-				.log(LogDetail.URI)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
-				.log(LogDetail.METHOD)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 		
 	}
@@ -49,10 +44,7 @@ public class SpecUtil {
 				.setBaseUri(getProperty("BASE_URI"))
 				.addHeader("Authorization",AuthTokenProvider.getToken(role))
 				.setAccept(ContentType.JSON).setContentType(ContentType.JSON)
-				.log(LogDetail.URI)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
-				.log(LogDetail.METHOD)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 	}	
 	
@@ -61,7 +53,6 @@ public class SpecUtil {
 		.expectContentType(ContentType.JSON)
 		.expectResponseTime(Matchers.lessThan(1000L))
 		.expectStatusCode(200)
-		.log(LogDetail.ALL)
 		.build();		
 	}
 	
@@ -69,7 +60,6 @@ public class SpecUtil {
 		return new ResponseSpecBuilder().expectContentType(ContentType.JSON)
 		.expectResponseTime(Matchers.lessThan(2000L))
 		.expectStatusCode(status)
-		.log(LogDetail.ALL)
 		.build();
 	}
 	
@@ -77,7 +67,6 @@ public class SpecUtil {
 		return new ResponseSpecBuilder()
 		.expectResponseTime(Matchers.lessThan(2000L))
 		.expectStatusCode(status)
-		.log(LogDetail.ALL)
 		.build();
 	}
 	
@@ -88,10 +77,7 @@ public class SpecUtil {
 				.setBody(payload)
 				.setAccept(ContentType.JSON)
 				.setContentType(ContentType.JSON)
-				.log(LogDetail.URI)
-				.log(LogDetail.HEADERS)
-				.log(LogDetail.BODY)
-				.log(LogDetail.METHOD)
+				.addFilter(new SensitiveDataFilter())
 				.build();
 	}	
 }

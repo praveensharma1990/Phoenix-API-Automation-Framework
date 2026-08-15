@@ -6,11 +6,12 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.api.services.AuthService;
 import com.dataproviders.api.bean.UserBean;
-
+@Listeners(com.listeners.APITestListener.class)
 public class LoginApiExcelDataDrivenTest {
 	
 	private AuthService authService;
