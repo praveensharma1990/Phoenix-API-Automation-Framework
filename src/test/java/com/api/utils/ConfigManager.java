@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class ConfigManager {
 	private static Properties prop = new Properties();
 	private static String PATH = "config/config.properties";
-	private static String env;
+	public static String env;
 	private static final Logger LOGGER = LogManager.getLogger(ConfigManager.class);
 
 	private ConfigManager() {
