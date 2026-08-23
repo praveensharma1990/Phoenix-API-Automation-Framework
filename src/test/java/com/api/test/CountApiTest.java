@@ -20,9 +20,17 @@ import com.api.services.DashboardService;
 
 import static com.api.utils.SpecUtil.*;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import static io.restassured.module.jsv.JsonSchemaValidator.*;
 @Listeners(com.listeners.APITestListener.class)
+@Epic("Job Management")
+@Feature("Job Count")
 public class CountApiTest {
 	private DashboardService dashboardService;
 	
@@ -33,6 +41,9 @@ public class CountApiTest {
 	}
 	
 	@Test(description="validate count api response is correct",groups= {"smoke","regression"})
+	@Story("Job count data is shown correctly")
+	@Description("validate count api response is correct")
+	@Severity(SeverityLevel.CRITICAL)
 	public void validateCountApiResponse() {
 	 dashboardService.count(FD)		
 	 .then()
