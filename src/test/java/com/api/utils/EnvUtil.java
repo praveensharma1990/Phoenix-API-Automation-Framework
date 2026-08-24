@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import io.qameta.allure.Step;
 
 public class EnvUtil {
 	
@@ -18,6 +19,7 @@ public class EnvUtil {
 		dotenv = Dotenv.load();
 	}
 	
+	@Step("Getting secrets from .env file")
 	public static String getValue(String varName) {
 		LOGGER.info("reading the value of {} from .evn ",varName);
 		return dotenv.get(varName);

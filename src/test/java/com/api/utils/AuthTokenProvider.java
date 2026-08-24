@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import com.api.constant.UserRole;
 import com.api.request.model.UserCredencials;
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 
 public class AuthTokenProvider {
@@ -21,16 +22,16 @@ public class AuthTokenProvider {
 	private AuthTokenProvider() {
 		// private constructor to prevent instantiation
 	}
-	
-	
+
+	@Step("Getting Auth token for the role")
 	public static String getToken(UserRole role) {
-		LOGGER.info("checking if token is available in the cache for the role {}",role);
-		if(tokenCace.containsKey(role)) {
-			LOGGER.info("token found for the role {}",role);
-			       return tokenCace.get(role);		       
-			
-		}	
-		LOGGER.info("Generating Token for the role {}",role);
+		LOGGER.info("checking if token is available in the cache for the role {}", role);
+		if (tokenCace.containsKey(role)) {
+			LOGGER.info("token found for the role {}", role);
+			return tokenCace.get(role);
+
+		}
+		LOGGER.info("Generating Token for the role {}", role);
 		UserCredencials userCredentials = switch (role) {
 		case FD -> new UserCredencials("iamfd", "password");
 		case SUP -> new UserCredencials("iamsup", "password");
@@ -39,12 +40,10 @@ public class AuthTokenProvider {
 		default -> throw new IllegalArgumentException("Invalid role: " + role);
 		};
 
-	token=given().baseUri(ConfigManager.getProperty("BASE_URI")).accept(ContentType.JSON)
-				.contentType(ContentType.JSON).body(userCredentials).when().post("/login").then().log()
-				.ifError().extract().body().jsonPath().getString("data.token");
-		   tokenCace.put(role, token);
-		   return token;	
-
-	
-}
+		token = given().baseUri(ConfigManager.getProperty("BASE_URI")).accept(ContentType.JSON)
+				.contentType(ContentType.JSON).body(userCredentials).when().post("/login").then().log().ifError()
+				.extract().body().jsonPath().getString("data.token");
+		tokenCace.put(role, token);
+		return token;
+	}
 }

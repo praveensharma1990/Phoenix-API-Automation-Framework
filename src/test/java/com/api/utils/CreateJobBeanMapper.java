@@ -14,6 +14,7 @@ import com.api.request.model.Problem;
 import com.dataproviders.api.bean.CreateJobBean;
 
 import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
+import io.qameta.allure.Step;
 
 public class CreateJobBeanMapper {
 	private static final Logger LOGGER = LogManager.getLogger(CreateJobBeanMapper.class);
@@ -21,7 +22,8 @@ public class CreateJobBeanMapper {
 	private CreateJobBeanMapper() {
 
 	}
-
+	
+	@Step("converting the create job bean class to create job payload for create job api")
 	public static CreateJobPayload beanMapper(CreateJobBean bean) {
 		LOGGER.info("converting the create job Bean {} to create job payload..", bean);
 		int mstServiceLocationId = Integer.parseInt(bean.getMst_service_location_id());

@@ -34,7 +34,7 @@ public class UserBean {
 
 	@Override
 	public String toString() {
-		return "UserPojo [username=" + username + ", password=" + password + "]";
+		return "UserPojo [username=" + username + ", password=******]";
 	}
 
 }

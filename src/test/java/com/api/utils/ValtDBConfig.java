@@ -7,6 +7,7 @@ import io.github.jopenlibs.vault.VaultConfig;
 import io.github.jopenlibs.vault.VaultException;
 import io.github.jopenlibs.vault.VaultImpl;
 import io.github.jopenlibs.vault.response.LogicalResponse;
+import io.qameta.allure.Step;
 
 public  class ValtDBConfig {
 	private static VaultConfig vaultConfig;
@@ -24,6 +25,7 @@ public  class ValtDBConfig {
 		vault = new VaultImpl(vaultConfig);
 	}	
 	
+	@Step("Getting secrets from valut")
 	public static String getSecretes(String key) {
 		LogicalResponse response = null;
 		try {
