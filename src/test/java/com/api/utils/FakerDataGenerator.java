@@ -16,6 +16,8 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problem;
 import com.github.javafaker.Faker;
 
+import io.qameta.allure.Step;
+
 public class FakerDataGenerator {
 	private static final String COUNTRY = "India";
 	private static final int MST_SERVICE_LOCATION_ID = 0;
@@ -32,7 +34,7 @@ public class FakerDataGenerator {
 
 	private FakerDataGenerator() {
 	}
-
+	@Step("Generating Fake create job Data")
 	public static CreateJobPayload generateFakeCreateJobData() {
 		LOGGER.info("generting the fake payload for createjob");
 		Customer customer = generateFakeCustomerData();
@@ -42,7 +44,8 @@ public class FakerDataGenerator {
 		return new CreateJobPayload(MST_SERVICE_LOCATION_ID, MST_PLATFORM_ID, MST_WARRANTY_STATUS_ID, MST_OEM_ID,
 				customer, customerAddress, customerProduct, problemList);
 	}
-
+    
+	@Step("Generating multiple Fake create job Data with count")
 	public static Iterator<CreateJobPayload> generateFakeCreateJobData(int count) {
 		LOGGER.info("generting the fake {} payload for createjob",count);
 		List<CreateJobPayload> createJobPayloadList = new ArrayList<>();

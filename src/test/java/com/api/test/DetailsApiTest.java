@@ -8,7 +8,16 @@ import org.testng.annotations.Test;
 import com.api.constant.UserRole;
 import com.api.request.model.Detail;
 import com.api.services.DashboardService;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 @Listeners(com.listeners.APITestListener.class)
+@Epic("Job Management")
+@Feature("Job Details")
 public class DetailsApiTest {
 	
 	private DashboardService dashboardService;
@@ -20,6 +29,9 @@ public class DetailsApiTest {
 	}	
 	
 	@Test(description = "validate the details Api test",groups = {"Smoke","api"})
+	@Story("Job Details is showin correctly for FD")
+	@Description("validate the details Api test is working find for user FD")
+	@Severity(SeverityLevel.CRITICAL)
 	public void DetailApiTest() {
 		dashboardService.details(UserRole.FD, detailPayload)
 		.then().log().ifValidationFails()

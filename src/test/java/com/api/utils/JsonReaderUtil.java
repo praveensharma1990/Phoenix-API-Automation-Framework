@@ -12,8 +12,11 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.qameta.allure.Step;
+
 public class JsonReaderUtil {
 
+	@Step("Loading Test Data from Json")
 	public static<T> Iterator<T> loadJSON(String fileName,Class<T[]> class1) {
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		ObjectMapper objectMapper = new ObjectMapper();

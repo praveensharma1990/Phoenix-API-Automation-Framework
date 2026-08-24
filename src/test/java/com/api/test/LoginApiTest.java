@@ -11,7 +11,16 @@ import org.testng.annotations.Test;
 
 import com.api.services.AuthService;
 import com.dataproviders.api.bean.UserBean;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 @Listeners(com.listeners.APITestListener.class)
+@Epic("User Management")
+@Feature("Authentication")
 public class LoginApiTest {
 	private UserBean usercredencials;
 	private AuthService authService;
@@ -21,7 +30,9 @@ public class LoginApiTest {
 		usercredencials = new UserBean("iamfd", "password");
 		authService = new AuthService();
 	}
-
+    @Story("Valid User should be able to login the system")
+    @Description("Varify Login Functionality is working")
+    @Severity(SeverityLevel.BLOCKER)
 	@Test(description = "Varify Login Funtionality is working for FD user", groups = { "smoke", "regression" })
 	public void loginApiTest() {
 		authService.login(usercredencials)

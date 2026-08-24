@@ -9,7 +9,16 @@ import org.testng.annotations.Test;
 
 import com.api.constant.UserRole;
 import com.api.services.UserService;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 @Listeners(com.listeners.APITestListener.class)
+@Epic("User Management")
+@Feature("User Details")
 public class UserDetailsApiTest {
 	
 	private UserService userDetailsService;
@@ -18,6 +27,9 @@ public class UserDetailsApiTest {
 	public void setup() {
 		userDetailsService = new UserService();
 	}
+	@Story("User Details should be shown")
+	@Description("valiate User Details api response is shwon correctly")
+	@Severity(SeverityLevel.CRITICAL)
 	@Test(description="valiate User Details api response is shwon correctly",groups= {"smoke","regression"})
 	public void getUserDetailsTest() {
 		

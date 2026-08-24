@@ -23,6 +23,13 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problem;
 import com.api.services.JobService;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 import static com.api.utils.DateTimeProvider.getDateAndTimeDaysAgo;
 import static com.api.utils.SpecUtil.*;
 
@@ -31,6 +38,8 @@ import static io.restassured.RestAssured.*;
 import java.util.ArrayList;
 import java.util.List;
 @Listeners(com.listeners.APITestListener.class)
+@Epic("Job Management")
+@Feature("Create Job")
 public class CreateJobApiTest {
 	private CreateJobPayload payload;
 	private JobService jobService;
@@ -54,8 +63,11 @@ public class CreateJobApiTest {
 
 	}
      
-	@Test(description = "validate create job api response is correct for inwarranty", groups = { "smoke",
+	@Test(description = "validate FD is able to create job for inwarranty flow", groups = { "smoke",
 			"regression" })
+	@Story("Fd should be able to create job")
+	@Description("validate FD is able to create job for inwarranty flow")
+	@Severity(SeverityLevel.BLOCKER)
 	public void createJobApiTest() {
 		jobService.createJob(UserRole.FD, payload)
 		.then()
