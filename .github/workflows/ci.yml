@@ -62,7 +62,7 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
-             github.token: ${{secrets.GITHUB_TOKEN}}
+             github_token: ${{secrets.GITHUB_TOKEN}}
              publish_dir: target/site/allure-maven-plugin
       
       - name: Upload Surefire Report
