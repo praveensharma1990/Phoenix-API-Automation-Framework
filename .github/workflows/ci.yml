@@ -28,6 +28,8 @@ on:
           - smoke.xml
           - regression.xml
           - testng-datadriven.xml
+permissions:
+        contents: write
 
 jobs:
   test:
@@ -63,7 +65,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
              github_token: ${{secrets.GITHUB_TOKEN}}
-             publish_dir: target/site/allure-maven-plugin
+             publish_dir: .target/site/allure-maven-plugin
       
       - name: Upload Surefire Report
         if: always()
