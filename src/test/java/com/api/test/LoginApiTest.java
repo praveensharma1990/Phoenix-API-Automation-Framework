@@ -33,7 +33,8 @@ public class LoginApiTest {
     @Story("Valid User should be able to login the system")
     @Description("Varify Login Functionality is working")
     @Severity(SeverityLevel.BLOCKER)
-	@Test(description = "Varify Login Funtionality is working for FD user", groups = { "smoke", "regression" })
+	@Test(description = "Varify Login Funtionality is working for FD user", groups = { "smoke", "regression" },
+	retryAnalyzer = com.retryanalyzer.Retryanalyzer.class)
 	public void loginApiTest() {
 		authService.login(usercredencials)
 		.then()
