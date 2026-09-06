@@ -55,7 +55,16 @@ jobs:
           mvn clean test \
             -DsuiteXmlFile=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.testng_suite || 'testng.xml' }} \
             -Denv=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'qa' }}
-
+      - name: Generating Allure Report
+        if: always()
+        run: mvn allure:report
+      - name: creating github branch
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4.0.0
+        with:
+             github.token: ${{secrets.GITHUB_TOKEN}}
+             publish_dir: target/site/allure-maven-plugin
+      
       - name: Upload Surefire Report
         if: always()
         uses: actions/upload-artifact@v4
