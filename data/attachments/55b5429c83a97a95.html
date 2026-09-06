@@ -1,0 +1,98 @@
+<div>POST to http://64.227.160.186:9000/v1/job/create</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;mst_service_location_id&quot;: 1,
+    &quot;mst_platform_id&quot;: 2,
+    &quot;mst_warrenty_status_id&quot;: 1,
+    &quot;mst_oem_id&quot;: 1,
+    &quot;customer&quot;: {
+        &quot;first_name&quot;: &quot;Ram&quot;,
+        &quot;last_name&quot;: &quot;Sharma&quot;,
+        &quot;mobile_number&quot;: &quot;9161759333&quot;,
+        &quot;mobile_number_alt&quot;: &quot;&quot;,
+        &quot;email_id&quot;: &quot;psagra13@gmail.com&quot;,
+        &quot;email_id_alt&quot;: &quot;psagra12@gmail.com&quot;
+    },
+    &quot;customer_address&quot;: {
+        &quot;flat_number&quot;: &quot;B 233&quot;,
+        &quot;apartment_name&quot;: &quot;Ajanja&quot;,
+        &quot;street_name&quot;: &quot;Vashundra&quot;,
+        &quot;area&quot;: &quot;noida&quot;,
+        &quot;landmark&quot;: &quot;near mother dairy&quot;,
+        &quot;pincode&quot;: &quot;201301&quot;,
+        &quot;state&quot;: &quot;Uttar Pradesh&quot;,
+        &quot;country&quot;: &quot;India&quot;
+    },
+    &quot;customer_product&quot;: {
+        &quot;serial_number&quot;: &quot;23456781801011&quot;,
+        &quot;imei1&quot;: &quot;23456781801011&quot;,
+        &quot;imei2&quot;: &quot;23456781801011&quot;,
+        &quot;dop&quot;: &quot;2026-08-29T13:00:03.854329921Z&quot;,
+        &quot;popurl&quot;: &quot;2026-08-29T13:00:03.854365315Z&quot;,
+        &quot;mst_model_id&quot;: 1,
+        &quot;product_id&quot;: 1
+    },
+    &quot;problems&quot;: [
+        {
+            &quot;id&quot;: 2,
+            &quot;remark&quot;: &quot;Battery Backup is only 30 minuts&quot;
+        }
+    ]
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RfbmFtZSI6ImZkIiwibGFzdF9uYW1lIjoiZmQiLCJsb2dpbl9pZCI6ImlhbWZkIiwibW9iaWxlX251bWJlciI6Ijg4OTk3NzY2NTUiLCJlbWFpbF9pZCI6Im1hcmtAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1ZjRkY2MzYjVhYTc2NWQ2MWQ4MzI3ZGViODgyY2Y5OSIsInJlc2V0X3Bhc3N3b3JkX2RhdGUiOm51bGwsImxvY2tfc3RhdHVzIjowLCJpc19hY3RpdmUiOjEsIm1zdF9yb2xlX2lkIjo1LCJtc3Rfc2VydmljZV9sb2NhdGlvbl9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjEtMTEtMDNUMDg6MDY6MjMuMDAwWiIsIm1vZGlmaWVkX2F0IjoiMjAyMS0xMS0wM1QwODowNjoyMy4wMDBaIiwicm9sZV9uYW1lIjoiRnJvbnREZXNrIiwic2VydmljZV9sb2NhdGlvbiI6IlNlcnZpY2UgQ2VudGVyIEEiLCJpYXQiOjE3ODg2OTk1OTl9.swH7zi3wHj6aODHlIyVlkuOg_eD-nq_-f8n3E_r4E48</div>
+            <div>Accept: application/json, application/javascript, text/javascript, text/json</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;http://64.227.160.186:9000/v1/job/create&#39; -H &#39;Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3RfbmFtZSI6ImZkIiwibGFzdF9uYW1lIjoiZmQiLCJsb2dpbl9pZCI6ImlhbWZkIiwibW9iaWxlX251bWJlciI6Ijg4OTk3NzY2NTUiLCJlbWFpbF9pZCI6Im1hcmtAZ21haWwuY29tIiwicGFzc3dvcmQiOiI1ZjRkY2MzYjVhYTc2NWQ2MWQ4MzI3ZGViODgyY2Y5OSIsInJlc2V0X3Bhc3N3b3JkX2RhdGUiOm51bGwsImxvY2tfc3RhdHVzIjowLCJpc19hY3RpdmUiOjEsIm1zdF9yb2xlX2lkIjo1LCJtc3Rfc2VydmljZV9sb2NhdGlvbl9pZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjEtMTEtMDNUMDg6MDY6MjMuMDAwWiIsIm1vZGlmaWVkX2F0IjoiMjAyMS0xMS0wM1QwODowNjoyMy4wMDBaIiwicm9sZV9uYW1lIjoiRnJvbnREZXNrIiwic2VydmljZV9sb2NhdGlvbiI6IlNlcnZpY2UgQ2VudGVyIEEiLCJpYXQiOjE3ODg2OTk1OTl9.swH7zi3wHj6aODHlIyVlkuOg_eD-nq_-f8n3E_r4E48&#39; -H &#39;Accept: application/json, application/javascript, text/javascript, text/json&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;mst_service_location_id&quot;: 1,
+    &quot;mst_platform_id&quot;: 2,
+    &quot;mst_warrenty_status_id&quot;: 1,
+    &quot;mst_oem_id&quot;: 1,
+    &quot;customer&quot;: {
+        &quot;first_name&quot;: &quot;Ram&quot;,
+        &quot;last_name&quot;: &quot;Sharma&quot;,
+        &quot;mobile_number&quot;: &quot;9161759333&quot;,
+        &quot;mobile_number_alt&quot;: &quot;&quot;,
+        &quot;email_id&quot;: &quot;psagra13@gmail.com&quot;,
+        &quot;email_id_alt&quot;: &quot;psagra12@gmail.com&quot;
+    },
+    &quot;customer_address&quot;: {
+        &quot;flat_number&quot;: &quot;B 233&quot;,
+        &quot;apartment_name&quot;: &quot;Ajanja&quot;,
+        &quot;street_name&quot;: &quot;Vashundra&quot;,
+        &quot;area&quot;: &quot;noida&quot;,
+        &quot;landmark&quot;: &quot;near mother dairy&quot;,
+        &quot;pincode&quot;: &quot;201301&quot;,
+        &quot;state&quot;: &quot;Uttar Pradesh&quot;,
+        &quot;country&quot;: &quot;India&quot;
+    },
+    &quot;customer_product&quot;: {
+        &quot;serial_number&quot;: &quot;23456781801011&quot;,
+        &quot;imei1&quot;: &quot;23456781801011&quot;,
+        &quot;imei2&quot;: &quot;23456781801011&quot;,
+        &quot;dop&quot;: &quot;2026-08-29T13:00:03.854329921Z&quot;,
+        &quot;popurl&quot;: &quot;2026-08-29T13:00:03.854365315Z&quot;,
+        &quot;mst_model_id&quot;: 1,
+        &quot;product_id&quot;: 1
+    },
+    &quot;problems&quot;: [
+        {
+            &quot;id&quot;: 2,
+            &quot;remark&quot;: &quot;Battery Backup is only 30 minuts&quot;
+        }
+    ]
+}&#39;
+    </div>
+
